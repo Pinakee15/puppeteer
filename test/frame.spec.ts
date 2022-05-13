@@ -278,6 +278,16 @@ describe('Frame specs', function () {
         server.PREFIX + '/frames/frame.html?param=value#fragment'
       );
     });
+    it('should support lazy frames', async () => {
+      const { page, server } = getTestState();
+
+      await page.setViewport({ width: 1158, height: 1227 });
+      await page.goto(server.PREFIX + '/frames/lazy-frame.html');
+
+      const frames = page.frames();
+      expect(frames.length).toBe(3);
+      expect(frames[frames.length - 1]._hasStartedLoading).toBeFalsy();
+    });
   });
 
   describe('Frame.client', function () {
