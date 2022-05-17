@@ -221,9 +221,7 @@ export class FrameManager extends EventEmitter {
           frameId,
         });
         ensureNewDocumentNavigation = !!response.loaderId;
-        return response.errorText
-          ? new Error(`${response.errorText} at ${url}`)
-          : null;
+        
       } catch (error) {
         return error;
       }
